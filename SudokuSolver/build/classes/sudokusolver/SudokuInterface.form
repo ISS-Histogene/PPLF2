@@ -388,9 +388,9 @@
                       </Group>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="a00" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                               <Component id="a01" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                               <Component id="a02" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                              <Component id="a00" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -459,11 +459,6 @@
     <Component class="javax.swing.JTextField" name="a02">
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="a02ActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JTextField" name="a00">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="a00ActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="a12">
@@ -698,6 +693,8 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="a00">
     </Component>
   </SubComponents>
 </Form>

@@ -26,7 +26,6 @@ public class SudokuSolver {
         Celula[][] sudoku = new Celula[9][9];
         for(int a=0; a<=8;a++){
             for(int b=0; b<=8;b++){
-                int valor = Integer.parseInt(String.valueOf(a)+String.valueOf(b));
                 if(matriz[a][b].equals("")){
                     Celula celula = new Celula(0, a, b);
                     sudoku[a][b] = celula;
@@ -34,8 +33,10 @@ public class SudokuSolver {
                     blankcells.add(posicao);
                 }
                 else{
+                    //System.out.println("caiu");
                     Celula celula = new Celula(Integer.parseInt(matriz[a][b]), a, b);
                     sudoku[a][b] = celula;
+                    System.out.println(sudoku[0][0].getNumero());
                 }
             }
         }

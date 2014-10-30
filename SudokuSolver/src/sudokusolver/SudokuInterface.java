@@ -16,7 +16,7 @@ import javax.swing.JTextField;
  */
 public class SudokuInterface extends javax.swing.JFrame {
 
-    private ArrayList<JTextField> posicoesmatriz = new ArrayList();
+    private final ArrayList<JTextField> posicoesmatriz = new ArrayList();
     
     public SudokuInterface() {
         initComponents();
@@ -212,7 +212,6 @@ public class SudokuInterface extends javax.swing.JFrame {
         a81 = new javax.swing.JTextField();
         a01 = new javax.swing.JTextField();
         a02 = new javax.swing.JTextField();
-        a00 = new javax.swing.JTextField();
         a12 = new javax.swing.JTextField();
         a11 = new javax.swing.JTextField();
         a10 = new javax.swing.JTextField();
@@ -289,6 +288,7 @@ public class SudokuInterface extends javax.swing.JFrame {
         a07 = new javax.swing.JTextField();
         a76 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        a00 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -304,12 +304,6 @@ public class SudokuInterface extends javax.swing.JFrame {
         a02.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 a02ActionPerformed(evt);
-            }
-        });
-
-        a00.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                a00ActionPerformed(evt);
             }
         });
 
@@ -769,9 +763,9 @@ public class SudokuInterface extends javax.swing.JFrame {
                                 .addComponent(a83, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(a00, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(a01, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(a02, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(a02, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(a00, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(a11, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1014,10 +1008,6 @@ public class SudokuInterface extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void a00ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_a00ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_a00ActionPerformed
     
     public void preencher(Estado estado){
         System.out.println("preenchendo");
@@ -1061,10 +1051,8 @@ public class SudokuInterface extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                SudokuInterface interfacee = new SudokuInterface();
-                interfacee.initComponents();
-                System.out.println(interfacee.a00.getText());
-                interfacee.setVisible(true);
+                new SudokuInterface().setVisible(true);
+
             }
         });
     }
