@@ -6,6 +6,8 @@
 package sudokusolver;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JTextField;
 
 /**
@@ -1005,7 +1007,11 @@ public class SudokuInterface extends javax.swing.JFrame {
         matriz[8][6] = this.a86.getText();
         matriz[8][7] = this.a87.getText();
         matriz[8][8] = this.a88.getText();
+        
+        
+        
         SudokuSolver.jogo(matriz, this);
+
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -1013,11 +1019,13 @@ public class SudokuInterface extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_a00ActionPerformed
     
-    public void preencher(Celula[][] celulas){
+    public void preencher(Estado estado){
         System.out.println("preenchendo");
+        Celula[][] celulas = estado.getMatriz();
         int valor = 0;
         for(int x=0; x<=8;x++){
             for(int y=0; y<=8;y++){
+                //System.out.println(String.valueOf(celulas[x][y].getNumero()));
                 posicoesmatriz.get(valor).setText(String.valueOf(celulas[x][y].getNumero()));
                 valor++;
             }

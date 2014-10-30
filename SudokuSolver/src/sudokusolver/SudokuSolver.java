@@ -17,10 +17,12 @@ import javax.swing.JOptionPane;
  * @author Gustavo
  */
 public class SudokuSolver {
-
+    
+    private static SudokuInterface tela;
  
     public static void jogo(String[][] matriz, SudokuInterface inter){
-        ArrayList<Celula> blankcells = new ArrayList();
+        tela = inter;
+        ArrayList<Posicao> blankcells = new ArrayList();
         Celula[][] sudoku = new Celula[9][9];
         for(int a=0; a<=8;a++){
             for(int b=0; b<=8;b++){
@@ -28,10 +30,8 @@ public class SudokuSolver {
                 if(matriz[a][b].equals("")){
                     Celula celula = new Celula(0, a, b);
                     sudoku[a][b] = celula;
-                    ArrayList vazio = new ArrayList();
-                    vazio.add(a);
-                    vazio.add(b);
-                    blankcells.add(celula);
+                    Posicao posicao = new Posicao(a, b);
+                    blankcells.add(posicao);
                 }
                 else{
                     Celula celula = new Celula(Integer.parseInt(matriz[a][b]), a, b);
@@ -42,73 +42,40 @@ public class SudokuSolver {
         Estado primeiroestado = new Estado(sudoku, blankcells, null, 1);
         resolvedor(primeiroestado, inter);
         
+        
     }
     
     public static void resolvedor(Estado testarestado, SudokuInterface inter){
-        inter.preencher(testarestado.getMatriz());
-        Estado generico = testarestado;
-        int x = 0;
-        while(true){
-            if(x==1){
-                JOptionPane.showMessageDialog(null, "Continuar");
-            }
-            if(generico.getBlankcells().size()==45){
-                x = 1;
-            }
-            inter.preencher(generico.getMatriz());
-            if(generico.getValor()==10){
-                    generico = generico.getEstadoanterior();
-                    generico.setValor(generico.getValor()+1);
-                }
-            else if(generico.getBlankcells().isEmpty()){
-                JOptionPane.showMessageDialog(null, "Resolvido");
-                return;
-            }
-            else {
-                Estado novoestado = copiarEstado(generico);
-                System.out.println("restantes: "+generico.getBlankcells().size());   
-                ArrayList chavecelula = novoestado.getBlankcells().keySet().iterator().next();
-                Celula celulatestar = novoestado.getBlankcells().get(chavecelula);
-                celulatestar.setNumero(generico.getValor());
-                if(testarValor(novoestado)){
-                    novoestado.getBlankcells().remove(chavecelula);
-                    generico.setValor(generico.getValor());
-                    generico = novoestado;
-                }
-                else{
-                    generico.setValor(generico.getValor()+1);
-=======
-    public static void resolvedor2(Estado estado){
-        int valor = 1;
-        Estado atual = estado;
-        while(!(atual.getBlankcells().isEmpty())){
-            ArrayList<Integer> chave = estado.getBlankcells().keySet().iterator().next();
-            Celula celula = estado.getBlankcells().get(chave);
-            
-        }
-    }
-    
-    
-    public static void resolvedor(Estado testarestado){
+        //JOptionPane.showMessageDialog(null, "Continuar");
+        System.out.println("Vazios: "+testarestado.getBlankcells().size());
         if(testarestado.getBlankcells().isEmpty()){
             JOptionPane.showMessageDialog(null, "Resolvido");
-            interfacee.preencher(testarestado.getMatriz());
-            return;
         }
-        else {
-            for(int t = 1; t<=9; t++){
-                System.out.println("restantes: "+testarestado.getBlankcells().size());   
-                ArrayList chavecelula = testarestado.getBlankcells().keySet().iterator().next();
-                Celula celulatestar = testarestado.getBlankcells().get(chavecelula);
-                celulatestar.setNumero(t);
-                if(!(conflitos(testarestado.getMatriz()))){
-                    System.out.println(chavecelula);
-                    testarestado.getBlankcells().remove(chavecelula);
-                    resolvedor(testarestado);
->>>>>>> origin/master
+        else if(testarestado.getValor()==10){
+                    Celula celulatestar = testarestado.getMatriz()[testarestado.getBlankcells().get(0).getLinha()][testarestado.getBlankcells().get(0).getColuna()];
+                    Celula anterior = testarestado.getEstadoanterior().getMatriz()[celulatestar.getLinha()][celulatestar.getColuna()];
+                    anterior.setNumero(0);
+                    testarestado.getEstadoanterior().setValor(testarestado.getEstadoanterior().getValor()+1);
+                    resolvedor(testarestado.getEstadoanterior(), inter);
                 }
+        else {
+            Estado novoestado = copiarEstado(testarestado);
+            Celula celulatestar = novoestado.getMatriz()[novoestado.getBlankcells().get(0).getLinha()][novoestado.getBlankcells().get(0).getColuna()];
+            celulatestar.setNumero(testarestado.getValor());
+            tela.preencher(novoestado);
+            if(testarValor(novoestado)){
+                novoestado.getBlankcells().remove(0);
+                resolvedor(novoestado, inter);
+            }
+            else{
+                
+
+                    testarestado.setValor(testarestado.getValor()+1);
+                    resolvedor(testarestado, inter);
+                
             }
         }
+        
     }
     
     public static boolean testarValor(Estado estado){
@@ -116,30 +83,25 @@ public class SudokuSolver {
             return true;
         }
         return false;
-    }
-    
-    
-        
-        
-  
-    
+    }  
     
     public static Estado copiarEstado(Estado estado){
-        HashMap<ArrayList<Integer>, Celula> blankcellestado = estado.getBlankcells();
+        ArrayList<Posicao> blankcellestado = estado.getBlankcells();
         Celula[][] celulasestado = estado.getMatriz();
         
-        HashMap<ArrayList<Integer>, Celula> blankcellcopiado = new HashMap();
+        ArrayList<Posicao> blankcellcopiado = new ArrayList();
         Celula[][] celulascopiado = new Celula[9][9];
         
-        for(ArrayList<Integer> chave : blankcellestado.keySet()){
-            blankcellcopiado.put(chave, blankcellestado.get(chave));
+        for(int x=0; x<=estado.getBlankcells().size()-1;x++){
+            blankcellcopiado.add(blankcellestado.get(x));
         }
         
         for(int j=0; j<=8;j++){
             for(int k=0; k<=8;k++){
-                celulascopiado[j][k] = celulasestado[j][k];
+                celulascopiado[j][k] = new Celula(celulasestado[j][k]);
             }
         }
+        
         return new Estado(celulascopiado, blankcellcopiado, estado, 1);
         
     }

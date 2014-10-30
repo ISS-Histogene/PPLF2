@@ -13,6 +13,12 @@ public class Celula {
     private int numero;
     private int linha;
     private int coluna;
+    
+    public Celula(Celula copiar){
+        this.numero = copiar.getNumero();
+        this.linha = copiar.getLinha();
+        this.coluna = copiar.getColuna();
+    }
 
     public Celula(int numero, int linha, int coluna) {
         this.numero = numero;
