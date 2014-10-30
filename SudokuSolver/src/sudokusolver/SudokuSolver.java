@@ -48,8 +48,9 @@ public class SudokuSolver {
     
     public static void resolvedor(Estado testarestado, SudokuInterface inter){
         //JOptionPane.showMessageDialog(null, "Continuar");
-        System.out.println("Vazios: "+testarestado.getBlankcells().size());
+        //System.out.println("Vazios: "+testarestado.getBlankcells().size());
         if(testarestado.getBlankcells().isEmpty()){
+            tela.preencher(testarestado);
             JOptionPane.showMessageDialog(null, "Resolvido");
         }
         else if(testarestado.getValor()==10){
@@ -63,7 +64,7 @@ public class SudokuSolver {
             Estado novoestado = copiarEstado(testarestado);
             Celula celulatestar = novoestado.getMatriz()[novoestado.getBlankcells().get(0).getLinha()][novoestado.getBlankcells().get(0).getColuna()];
             celulatestar.setNumero(testarestado.getValor());
-            tela.preencher(novoestado);
+            //tela.preencher(novoestado);
             if(testarValor(novoestado)){
                 novoestado.getBlankcells().remove(0);
                 resolvedor(novoestado, inter);
