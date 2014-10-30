@@ -14,7 +14,7 @@ import java.util.HashMap;
  */
 public class Estado {
     private Celula[][] matriz;
-    private ArrayList<Celula> blankcells;
+    private ArrayList<Posicao> blankcells;
     private Estado estadoanterior;
     private int valor;
 
@@ -34,11 +34,11 @@ public class Estado {
         this.matriz = matriz;
     }
 
-    public ArrayList<Celula> getBlankcells() {
+    public ArrayList<Posicao> getBlankcells() {
         return blankcells;
     }
 
-    public void setBlankcells(ArrayList<Celula> blankcells) {
+    public void setBlankcells(ArrayList<Posicao> blankcells) {
         this.blankcells = blankcells;
     }
 
@@ -50,7 +50,7 @@ public class Estado {
         this.estadoanterior = estadoanterior;
     }
 
-    public Estado(Celula[][] matriz, ArrayList<Celula> blankcells, Estado estadoanterior, int valor) {
+    public Estado(Celula[][] matriz, ArrayList<Posicao> blankcells, Estado estadoanterior, int valor) {
         this.matriz = matriz;
         this.blankcells = blankcells;
         this.estadoanterior = estadoanterior;
